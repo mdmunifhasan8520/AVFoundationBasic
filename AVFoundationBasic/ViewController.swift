@@ -7,15 +7,31 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
+    
+    //Create audio Player Object
+    var audioPlayer = AVAudioPlayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        print("Hello")
+        
+        //sound File
+        let sound = Bundle.main.path(forResource: "C#", ofType: ".wav")
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+            
+        } catch {
+            print("error")
+        }
     }
 
-
+    @IBAction func PlaySound(_ sender: Any) {
+        audioPlayer.play()
+        print("play sound")
+    }
+    
 }
 
