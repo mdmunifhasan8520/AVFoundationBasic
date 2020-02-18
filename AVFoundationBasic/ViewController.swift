@@ -14,14 +14,21 @@ class ViewController: UIViewController {
     //Create audio Player Object
     var audioPlayer = AVAudioPlayer()
 
+    @IBOutlet weak var playedTime: UILabel!
+    
+    @IBOutlet weak var PlaySoundLabel: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        playAudio()
+       
+    }
+    func playAudio() {
         //sound File
-        let sound = Bundle.main.path(forResource: "C#", ofType: ".wav")
+        let soundURL = Bundle.main.path(forResource: "C#", ofType: ".wav")
         
         do {
-            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundURL!))
             
         } catch {
             print("error")
@@ -30,6 +37,7 @@ class ViewController: UIViewController {
 
     @IBAction func PlaySound(_ sender: Any) {
         audioPlayer.play()
+        PlaySoundLabel.titleLabel?.text = "Stop Sound"
         print("play sound")
     }
     
