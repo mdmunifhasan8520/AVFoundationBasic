@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         var timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(upadteSlider), userInfo: nil, repeats: true)
     }
     
+    
     @IBAction func stopMusic(_ sender: Any) {
         audioPlayer.stop()
         audioPlayer.currentTime = 0
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
             audioPlayer.stop()
             isPlaying = false
         } else {
+            audioPlayer.prepareToPlay()
             audioPlayer.play()
             isPlaying = true
             
@@ -56,6 +58,11 @@ class ViewController: UIViewController {
         audioPlayer.play()
     }
     
+    /**
+     This function is for playback time label
+
+    - Returns: nothing
+    */
     @objc func updateTime() {
         let currentTime = Int(audioPlayer.currentTime)
         let minutes = currentTime/60
@@ -63,6 +70,11 @@ class ViewController: UIViewController {
         
         playedTime.text = String(format: "%02d:%02d", minutes,seconds) as String
     }
+    
+    /**
+     This function for change the slider value
+        - Returns: nothing
+     */
     
     @objc func upadteSlider() {
         playBackSlider.value = Float(audioPlayer.currentTime)
